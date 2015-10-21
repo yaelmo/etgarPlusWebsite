@@ -6,18 +6,35 @@ using System.Data.SqlClient;
 using etgarPlus.Classes;
 using System.Data.OleDb;
 using System.Diagnostics;
+using MySql.Data.MySqlClient;
 
 namespace etgarPlus
 {
     public class ClientDAL
     {
-        public string s;
-        public SqlConnection con;
+        // public string s;
+        //public SqlConnection con;
+        private MySqlConnection con = null;
+        private MySqlConnectionStringBuilder sb = null;
+        private MySqlCommand cmd = null;
 
         public ClientDAL()
         {
-            s = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
-            con = new SqlConnection(s);
+            //s = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
+            //con = new SqlConnection(s); 
+            sb = new MySqlConnectionStringBuilder();
+            sb.Server = "cea766ee-d14f-4cde-9659-a53500832f5d.mysql.sequelizer.com";
+            sb.UserID = "qgdrzcnrgssnqeml";
+            sb.Password = "vTYDtKuwUGF6a6QZQ4rPcKGqRgGTXZgzzmZHGudb3T5vHHQrcZWSZVyTmHUndJF3";
+            sb.Database = "dbcea766eed14f4cde9659a53500832f5d";
+            try
+            {
+                con = new MySqlConnection(sb.ToString());
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine("Error: {0}", e.ToString());
+            }
 
         }
         public void AddNewClient(int Id, string Name, string ContactName, string Address, int CityID,
@@ -27,7 +44,7 @@ namespace etgarPlus
             string sqlString = "INSERT INTO Client (Id, Name, ContactName, Address, CityID, ZipCode, Phone, ContactPhone, " +
             "OpenTime, LevelPrice, Email, Password, Status) VALUES (@val1, @val2, @val3, @val4, @val5, @val6, @val7, @val8, @val9," +
             "@val10, @val11, @val12, @val13);";
-            using (SqlCommand comm = new SqlCommand())
+            using (MySqlCommand comm = new MySqlCommand())
             {
                 comm.Connection = con;
                 comm.CommandText = sqlString;
@@ -72,8 +89,7 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = @"DELETE FROM Client c where c.Name = " + Name + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
-            com.ExecuteNonQuery();
+            MySqlCommand com = new MySqlCommand(sqlString, con); com.ExecuteNonQuery();
             con.Close();
 
         }
@@ -81,9 +97,8 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select Max(Id) as Id from Client;";
-            SqlCommand com = new SqlCommand(sqlString, con);
-            int maxId = 0;
-            using (SqlDataReader rdr = com.ExecuteReader())
+            MySqlCommand com = new MySqlCommand(sqlString, con); int maxId = 0;
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -99,9 +114,8 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Client";
-            SqlCommand com = new SqlCommand(sqlString, con);
-            List<Client> listClient = new List<Client>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            MySqlCommand com = new MySqlCommand(sqlString, con); List<Client> listClient = new List<Client>();
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -116,9 +130,8 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Client c where c.Name = " + Name + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
-            List<Client> listClient = new List<Client>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            MySqlCommand com = new MySqlCommand(sqlString, con); List<Client> listClient = new List<Client>();
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -133,9 +146,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Client c where c.Email = " + email1 + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con); 
             List<Client> listClient = new List<Client>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -152,9 +165,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Client c where c.ContactName = " + ContactName + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con); 
             List<Client> listClient = new List<Client>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -169,8 +182,8 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Client c where ";//////////
-            SqlCommand com = new SqlCommand(sqlString, con);
-            SqlDataReader rdr = com.ExecuteReader();
+            MySqlCommand com = new MySqlCommand(sqlString, con);
+            MySqlDataReader rdr = com.ExecuteReader();
             con.Close();
             return ((String)rdr[0]).Trim();
         }
@@ -179,9 +192,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Client";///////////////////////////////////
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con); 
             List<Client> listClient = new List<Client>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -196,9 +209,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Client";/////////////////////////////////
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con); 
             List<Client> listClient = new List<Client>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -213,10 +226,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Client where Email='" + eMail + "' AND Password='" + Password + "';";
-            SqlCommand com = new SqlCommand(sqlString, con);
-
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             int c = 0;
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -232,9 +244,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Client c where Email='" + eMail + "';";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con); 
             Client client = null;
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -250,9 +262,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Client where Status='" + 1 + "';";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con); 
             List<Client> listClient = new List<Client>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -270,7 +282,7 @@ namespace etgarPlus
             try
             {
                 Debug.WriteLine(sqlString);
-                SqlCommand com = new SqlCommand(sqlString, con);
+                MySqlCommand com = new MySqlCommand(sqlString, con); 
                 com.ExecuteNonQuery();
                 con.Close();
                 return true;

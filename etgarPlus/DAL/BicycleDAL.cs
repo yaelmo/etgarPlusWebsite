@@ -5,6 +5,7 @@ using System.Web;
 using System.Data.SqlClient;
 using etgarPlus.Classes;
 using System.Diagnostics;
+using MySql.Data.MySqlClient;
 
 //MessageBox.Show
 namespace etgarPlus
@@ -12,13 +13,29 @@ namespace etgarPlus
     public class BicycleDAL
     {
 
-        public static string s;
-        public SqlConnection con;
+        // public string s;
+        //public SqlConnection con;
+        private MySqlConnection con = null;
+        private MySqlConnectionStringBuilder sb = null;
+        private MySqlCommand cmd = null;
 
         public BicycleDAL()
         {
-            s = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
-            con = new SqlConnection(s); 
+            //s = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
+            //con = new SqlConnection(s); 
+            sb = new MySqlConnectionStringBuilder();
+            sb.Server = "cea766ee-d14f-4cde-9659-a53500832f5d.mysql.sequelizer.com";
+            sb.UserID = "qgdrzcnrgssnqeml";
+            sb.Password = "vTYDtKuwUGF6a6QZQ4rPcKGqRgGTXZgzzmZHGudb3T5vHHQrcZWSZVyTmHUndJF3";
+            sb.Database = "dbcea766eed14f4cde9659a53500832f5d";
+            try
+            {
+                con = new MySqlConnection(sb.ToString());
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine("Error: {0}", e.ToString());
+            } 
         }
         public void AddNewBike(int NewId, int NewMainCategoryId, int NewSubCategoryId, int NewName, int Newsize,
             string NewSpecification, int NewcolorId, Double NewRetailPrice, Double NewRegularPrice, Double NewClubPrice,
@@ -28,7 +45,7 @@ namespace etgarPlus
             string sqlString = "INSERT INTO Bicycle (Id, MainCategory, SubCategory, Name, size, Specification, color, RetailPrice, " +
            "RegularPrice, ClubPrice, Quantity, Image, Model) VALUES (@val1, @val2, @val3, @val4, @val5, @val6, @val7, @val8, @val9," +
            "@val10, @val11, @val12, @val13);";
-            using (SqlCommand comm = new SqlCommand())
+            using (MySqlCommand comm = new MySqlCommand())
             {
                 comm.Connection = con;
                 comm.CommandText = sqlString;
@@ -70,7 +87,7 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = @"DELETE FROM Bicycle WHERE Id = " + Id + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             com.ExecuteNonQuery();
             con.Close();
 
@@ -80,9 +97,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Bicycle";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Bicycles> listBicycle = new List<Bicycles>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -98,9 +115,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Bicycle b where b.Id = " + Id + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             Bicycles Bike = null;
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -118,9 +135,9 @@ namespace etgarPlus
             string sqlString = "select b.Id, b.MainCategory, b.SubCategory, b.Name, b.size, b.Specification," +
            "b.color, b.RetailPrice, b.RegularPrice, b.ClubPrice, b.Quantity, b.Image, b.Model" +
            "from Bicycle b, ProducerID p where b.Name = p.Id AND p.Producer = " + Name + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Bicycles> listBicycle = new List<Bicycles>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -138,9 +155,9 @@ namespace etgarPlus
             string sqlString = "select b.Id, b.MainCategory, b.SubCategory, b.Name, b.size, b.Specification," +
             "b.color, b.RetailPrice, b.RegularPrice, b.ClubPrice, b.Quantity, b.Image, b.Model" +
             "from Bicycle b, MainCategoryID m where b.MainCategory = m.Id AND m.CategoryName = " + MainCategory + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Bicycles> listBicycle = new List<Bicycles>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -156,9 +173,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Bicycle b order by b.Name;";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Bicycles> listBicycle = new List<Bicycles>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -174,9 +191,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Bicycle b order by b.MainCategory ;";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Bicycles> listBicycle = new List<Bicycles>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -192,9 +209,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Bicycle b order by b.SubCategory ;";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Bicycles> listBicycle = new List<Bicycles>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -210,9 +227,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Bicycle b order by b.Size ;";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Bicycles> listBicycle = new List<Bicycles>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -228,9 +245,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Bicycle b where b.size >= " + min + " AND b.size <= " + max + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Bicycles> listBicycle = new List<Bicycles>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -248,9 +265,9 @@ namespace etgarPlus
             string sqlString = "select b.Id, b.MainCategory, b.SubCategory, b.Name, b.size, b.Specification,"+
             "b.color, b.RetailPrice, b.RegularPrice, b.ClubPrice, b.Quantity, b.Image, b.Model"+
             "from Bicycle b, ColorsID c where c.Color = "+ color+" AND b.color = c.Id ;";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Bicycles> listBicycle = new List<Bicycles>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -277,9 +294,9 @@ namespace etgarPlus
             {
                 sqlString = "select * from Bicycle b where b.ClubPrice >= " + minPrice + "AND b.ClubPrice <= " + maxPrice + ";";
             }
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Bicycles> listBicycle = new List<Bicycles>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -294,9 +311,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select Max(Id) as Id from Bicycle;";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             int maxId = 0;
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {

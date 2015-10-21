@@ -5,21 +5,36 @@ using System.Linq;
 using System.Web;
 using etgarPlus.Classes;
 using System.Configuration;
+using MySql.Data.MySqlClient;
 
 namespace etgarPlus
 {
     public class AccessoriesDAL
     {
-         public string s;
-        public SqlConnection con;
+        // public string s;
+        //public SqlConnection con;
+        private MySqlConnection con = null;
+        private MySqlConnectionStringBuilder sb = null;
+        private MySqlCommand cmd = null;
 
         public AccessoriesDAL()
         {
-           //s = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Yael\Dropbox\etgarplus\etgarPlusDB.mdf;Integrated Security=True;Connect Timeout=30";
-           //s = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\David\Dropbox\etgarPlus\etgarPlusDB.mdf;Integrated Security=True;Connect Timeout=30";
-           //s = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\Talia\Dropbox\etgarplus\etgarPlusDB.mdf;Integrated Security=True;Connect Timeout=30";
-           s = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
-           con = new SqlConnection(s);
+            //s = System.Configuration.ConfigurationManager.AppSettings["ConnectionString"];
+            //con = new SqlConnection(s); 
+           
+            sb = new MySqlConnectionStringBuilder();
+            sb.Server = "cea766ee-d14f-4cde-9659-a53500832f5d.mysql.sequelizer.com";
+            sb.UserID = "qgdrzcnrgssnqeml";
+            sb.Password = "vTYDtKuwUGF6a6QZQ4rPcKGqRgGTXZgzzmZHGudb3T5vHHQrcZWSZVyTmHUndJF3";
+            sb.Database = "dbcea766eed14f4cde9659a53500832f5d";
+            try
+            {
+                con = new MySqlConnection(sb.ToString());
+            }
+            catch (MySqlException e)
+            {
+                Console.WriteLine("Error: {0}", e.ToString());
+            }
             
         }
 
@@ -27,9 +42,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Accessories";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Accessories> listAccessories = new List<Accessories>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -59,7 +74,7 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = @"DELETE FROM Accessories a where a.Id = " + Id + "AND a.Name = " + Name + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             com.ExecuteNonQuery();
             con.Close();
 
@@ -69,9 +84,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Accessories a group by a.MainCategoryID";///////////////
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Accessories> listAccessories = new List<Accessories>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -87,9 +102,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Accessories";///////////////////////////
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Accessories> listAccessories = new List<Accessories>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -105,9 +120,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Accessories";/////////////////////////
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Accessories> listAccessories = new List<Accessories>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -123,9 +138,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Accessories a where a.CategoryID = " + CategoryID + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Accessories> listAccessories = new List<Accessories>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -141,9 +156,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Accessories a where a.SubCategoryID = " + SubCategoryID + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Accessories> listAccessories = new List<Accessories>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
@@ -159,9 +174,9 @@ namespace etgarPlus
         {
             con.Open();
             string sqlString = "select * from Accessories a where a.Name = " + Name + ";";
-            SqlCommand com = new SqlCommand(sqlString, con);
+            MySqlCommand com = new MySqlCommand(sqlString, con);
             List<Accessories> listAccessories = new List<Accessories>();
-            using (SqlDataReader rdr = com.ExecuteReader())
+            using (MySqlDataReader rdr = com.ExecuteReader())
             {
                 while (rdr.Read())
                 {
