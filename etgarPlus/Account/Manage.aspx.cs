@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using etgarPlus.Models;
 
-namespace etgarPlus.Account
+namespace etgarPlus.Account//jkhk
 {
     public partial class Manage : System.Web.UI.Page
     {
