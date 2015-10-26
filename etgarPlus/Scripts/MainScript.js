@@ -3,22 +3,25 @@ var images = [];
 images[0] = "../images/1.png";
 images[1] = "../images/2.png";
 images[2] = "../images/3.png";
-images[3] = "../images/1.png";
-images[4] = "../images/2.png";
-images[5] = "../images/3.png";
 //images[3] = "http://i1.ytimg.com/vi/XzFmOKNf8sc/default.jpg";
 //images[4] = "http://i2.ytimg.com/vi/-2m1e4g2MFM/default.jpg";
 //images[5] = "http://i1.ytimg.com/vi/lK2TSYBh7fw/default.jpg";
 
-var i = 0;
-setInterval(fadeDivs, 3000);
+var i = -1;
+setInterval(fadeDivs, 10000);
 
 function fadeDivs() {
-    i = i < images.length ? i : 0;
-    $('.MainImage').fadeOut(1500, function () {
-        $(this).attr('src', images[i]).fadeIn(1000);
-    })
-    i++;
+        if (i <= (images.length-1)) {
+            i++;
+        }
+        else {
+            i = 0;
+        }
+        // i = i < images.length ? i : 0;
+        $('.MainImage').fadeOut(1590, function () {
+            $(this).attr('src', images[i]).fadeIn(1000);
+        })
+    
 }
 
 function openProperties(bikeId) {
