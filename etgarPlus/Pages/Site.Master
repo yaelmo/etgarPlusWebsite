@@ -23,11 +23,11 @@
         <div id="header">
             <div id="title">
                 <div id="logo">
-                    <img alt="logo" class="auto-style1" src="../images/logo.png" />
+                    <img alt="logo" class="auto-style1" id="auto-style1" src="../images/logo.png" />
                 </div>
             </div>
         </div>
-        <div id="MainImage"></div>
+         <img alt="logo" id="MainImage"  class="MainImage" src="../images/3.png" />
         <div id="menu" runat="server">
             <ul>
                 <li name="publicUser" class="publicUser" runat="server"><a href="../Pages/Main" class="current">דף הבית</a></li>

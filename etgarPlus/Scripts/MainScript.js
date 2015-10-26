@@ -1,4 +1,27 @@
-﻿function openProperties(bikeId) {
+﻿
+var images = [];
+images[0] = "../images/1.png";
+images[1] = "../images/2.png";
+images[2] = "../images/3.png";
+images[3] = "../images/1.png";
+images[4] = "../images/2.png";
+images[5] = "../images/3.png";
+//images[3] = "http://i1.ytimg.com/vi/XzFmOKNf8sc/default.jpg";
+//images[4] = "http://i2.ytimg.com/vi/-2m1e4g2MFM/default.jpg";
+//images[5] = "http://i1.ytimg.com/vi/lK2TSYBh7fw/default.jpg";
+
+var i = 0;
+setInterval(fadeDivs, 3000);
+
+function fadeDivs() {
+    i = i < images.length ? i : 0;
+    $('.MainImage').fadeOut(1500, function () {
+        $(this).attr('src', images[i]).fadeIn(1000);
+    })
+    i++;
+}
+
+function openProperties(bikeId) {
     document.getElementById('left_column_Body_properties').style.display = 'block';
     document.getElementById('left_column_Body_fade').style.display = 'block';
 }
