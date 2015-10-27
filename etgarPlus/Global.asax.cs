@@ -44,6 +44,7 @@ namespace etgarPlus
                     smtp.Credentials = new NetworkCredential(emailFrom, emailpassword);
                     smtp.EnableSsl = enableSSL;
                     smtp.Send(mail);
+
                 }
             }
         }
