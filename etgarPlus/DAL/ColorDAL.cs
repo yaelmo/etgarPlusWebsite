@@ -105,7 +105,7 @@ namespace etgarPlus.DAL
         public String GetColor(int ID)
         {
             con.Open();
-            string sqlString = "select Color from ColorsId p where p.Id = " + ID.ToString() + ";";
+            string sqlString = "select Color from ColorsID p where p.Id = " + ID.ToString() + ";";
             MySqlCommand com = new MySqlCommand(sqlString, con);
             String color = "";
             using (MySqlDataReader rdr = com.ExecuteReader())

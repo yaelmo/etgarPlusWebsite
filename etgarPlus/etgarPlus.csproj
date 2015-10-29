@@ -41,6 +41,12 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Cloudinary">
+      <HintPath>..\packages\Cloudinary.0.0.5\lib\Cloudinary.dll</HintPath>
+    </Reference>
+    <Reference Include="CloudinaryDotNet">
+      <HintPath>..\packages\CloudinaryDotNet.1.0.22\lib\net40\CloudinaryDotNet.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Microsoft.Owin.2.0.0.0.Fakes">
       <HintPath>FakesAssemblies\Microsoft.Owin.2.0.0.0.Fakes.dll</HintPath>
@@ -63,6 +69,7 @@
       <HintPath>FakesAssemblies\System.Web.4.0.0.0.Fakes.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Windows.Controls.Ribbon" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />

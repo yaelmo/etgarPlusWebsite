@@ -1,12 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Diagnostics;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using System.Windows;
+using System.Windows.Controls;
 
+using CloudinaryDotNet;
+using CloudinaryDotNet.Actions;
+using System.IO;
 namespace etgarPlus.Pages
 {
     public partial class AddProduct : System.Web.UI.Page
@@ -18,10 +24,11 @@ namespace etgarPlus.Pages
         etgarPlus.Logic.CategoryBL categorBl = new Logic.CategoryBL();
         etgarPlus.Logic.SizeBL sizeBl = new Logic.SizeBL();
         etgarPlus.Logic.ColorBL Color_Bl = new etgarPlus.Logic.ColorBL();
-
+       
 
         protected void Page_Load(object sender, EventArgs e)
         {  
+
             etgarPlus.Logic.ProducerBL producerBL = new etgarPlus.Logic.ProducerBL();
             List<etgarPlus.Classes.Producer> lisProducer = producerBL.getAllProducer();
 
@@ -84,9 +91,19 @@ namespace etgarPlus.Pages
 
         }
 
+
+
+
         protected void submitButton_Click(object sender, EventArgs e)
         {
+ 
+           // BackgroundUploader bgUploader =  GetUploader();
             string fileName = System.IO.Path.GetFileName(FileUpload1.PostedFile.FileName);
+           
+            Console.WriteLine(fileName);
+            string fileName2 = Global.uploadImage(FileUpload1.PostedFile.FileName);
+
+
             //FileUpload1.PostedFile.SaveAs(Server.MapPath("~/images/" + fileName));
             // Session["image"] = "~/images/" + fileName;
             // img1.ImageUrl = "~/images/" + fileName;
@@ -235,6 +252,31 @@ namespace etgarPlus.Pages
             {
                 img1.ImageUrl = Session["image"].ToString();
             }*/
+        }
+
+        protected void Browse_Click(object sender, EventArgs e)
+        {
+            //// Create an instance of the open file dialog box.
+            //OpenFileDialog openFileDialog1 = new OpenFileDialog();
+            
+            //openFileDialog1.Multiselect = false;
+
+            //// Call the ShowDialog method to show the dialog box.
+            //bool? userClickedOK = openFileDialog1.ShowDialog();
+
+            //// Process input if the user clicked OK.
+            //if (userClickedOK == true)
+            //{
+            //    // Open the selected file to read.
+            //    System.IO.Stream fileStream = openFileDialog1.File.OpenRead();
+
+            //    using (System.IO.StreamReader reader = new System.IO.StreamReader(fileStream))
+            //    {
+            //        // Read the first line from the file and write it the textbox.
+            //        tbResults.Text = reader.ReadLine();
+            //    }
+            //    fileStream.Close();
+            //}
         }
     }
 }

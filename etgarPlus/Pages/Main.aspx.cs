@@ -40,6 +40,7 @@ namespace etgarPlus.Pages
             
             if (Session["listBike"] != null)
             {
+
                 listBike = (List<Bicycles>)Session["listBike"];
                 // ColorSelector.SelectedValue = Session["listBike"].ToString();
             }
