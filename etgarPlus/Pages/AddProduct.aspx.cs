@@ -113,10 +113,11 @@ namespace etgarPlus.Pages
             {
                 fn = System.IO.Path.GetFileName(File1.PostedFile.FileName);
                 SaveLocation = Server.MapPath("~/images") + "\\" + fn;
+                File1.PostedFile.SaveAs(SaveLocation);
+                Response.Write("The file has been uploaded.");
                 try
                 {
-                    File1.PostedFile.SaveAs(SaveLocation);
-                    Response.Write("The file has been uploaded.");
+                    
                 }
                 catch (Exception ex)
                 {
