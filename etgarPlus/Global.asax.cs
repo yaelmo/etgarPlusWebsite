@@ -54,25 +54,25 @@ namespace etgarPlus
                 }
             }
         }
-        internal static String uploadImage(string filePath) 
-        {
+        //internal static String uploadImage(string filePath) 
+        //{
 
 
-            //CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary();
-            CloudinaryDotNet.Account account = new CloudinaryDotNet.Account("hmtca4hsp", "551419468127826", "6CRKqZzHmHxqCvpLaObNj2Hmsis");
+        //    //CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary();
+        //    CloudinaryDotNet.Account account = new CloudinaryDotNet.Account("hmtca4hsp", "551419468127826", "6CRKqZzHmHxqCvpLaObNj2Hmsis");
 
-            CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
-            CloudinaryDotNet.Actions.ImageUploadParams uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams()
-            {
-                File = new CloudinaryDotNet.Actions.FileDescription(filePath),//@"C:\Users\David\Downloads\etgarPlusWebsite-master\etgarPlusWebsite\etgarPlus\images\1.png"),
-                PublicId = "1"
-            };
+        //    CloudinaryDotNet.Cloudinary cloudinary = new CloudinaryDotNet.Cloudinary(account);
+        //    CloudinaryDotNet.Actions.ImageUploadParams uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams()
+        //    {
+        //        File = new CloudinaryDotNet.Actions.FileDescription(filePath),//@"C:\Users\David\Downloads\etgarPlusWebsite-master\etgarPlusWebsite\etgarPlus\images\1.png"),
+        //        PublicId = "1"
+        //    };
 
-            CloudinaryDotNet.Actions.ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
+        //    CloudinaryDotNet.Actions.ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
 
             
-            string url = cloudinary.Api.UrlImgUp.BuildUrl("1.png");
-            return url;
-        }
+        //    string url = cloudinary.Api.UrlImgUp.BuildUrl("1.png");
+        //    return url;
+        //}
     }
 }
