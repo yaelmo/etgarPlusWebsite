@@ -13,7 +13,6 @@ using System.Windows.Controls;
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using System.IO;
-using System.Web.UI.HtmlControls;
 namespace etgarPlus.Pages
 {
     public partial class AddProduct : System.Web.UI.Page
