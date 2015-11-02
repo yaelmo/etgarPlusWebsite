@@ -8,18 +8,18 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
+<<<<<<< HEAD
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using System.Configuration;
 using System.Diagnostics;
+=======
+>>>>>>> parent of e6cc75b... cloudinary
 
 namespace etgarPlus
 {
- 
     public class Global : HttpApplication
     {
-      
-
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
@@ -55,6 +55,7 @@ namespace etgarPlus
                 }
             }
         }
+<<<<<<< HEAD
         internal static String uploadImage(String filePath, String publicId) 
         {
 
@@ -75,5 +76,7 @@ namespace etgarPlus
             return url;
         }
        
+=======
+>>>>>>> parent of e6cc75b... cloudinary
     }
 }

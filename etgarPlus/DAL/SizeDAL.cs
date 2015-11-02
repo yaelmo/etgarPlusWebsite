@@ -81,7 +81,11 @@ namespace etgarPlus.DAL
         public String GetSize(int ID)
         {
             con.Open();
+<<<<<<< HEAD
             string sqlString = "select p.Size from SizeID p where p.Id = " + ID.ToString() + ";";
+=======
+            string sqlString = "select Size from SizeId p where p.Id = " + ID.ToString() + ";";
+>>>>>>> parent of e6cc75b... cloudinary
             MySqlCommand com = new MySqlCommand(sqlString, con);
             String size = "";
             using (MySqlDataReader rdr = com.ExecuteReader())
