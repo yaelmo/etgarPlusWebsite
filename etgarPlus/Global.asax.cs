@@ -65,13 +65,14 @@ namespace etgarPlus
             CloudinaryDotNet.Actions.ImageUploadParams uploadParams = new CloudinaryDotNet.Actions.ImageUploadParams()
             {
                 File = new CloudinaryDotNet.Actions.FileDescription(filePath),//@"C:\Users\David\Downloads\etgarPlusWebsite-master\etgarPlusWebsite\etgarPlus\images\1.png"),
-                PublicId = "1"
+                PublicId = "2"
             };
 
             CloudinaryDotNet.Actions.ImageUploadResult uploadResult = cloudinary.Upload(uploadParams);
 
             
-            string url = cloudinary.Api.UrlImgUp.BuildUrl("1.png");
+            string url = cloudinary.Api.UrlImgUp.BuildUrl("2" + filePath.Substring(filePath.IndexOf(".")));
+            Console.WriteLine(url);
             return url;
         }
     }

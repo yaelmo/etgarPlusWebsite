@@ -101,12 +101,13 @@ namespace etgarPlus.Pages
             string fileName = System.IO.Path.GetFileName(FileUpload1.PostedFile.FileName);
            
             Console.WriteLine(fileName);
-            string fileName2 = Global.uploadImage(FileUpload1.PostedFile.FileName);
+            
 
-
-            //FileUpload1.PostedFile.SaveAs(Server.MapPath("~/images/" + fileName));
-            // Session["image"] = "~/images/" + fileName;
-            // img1.ImageUrl = "~/images/" + fileName;
+            
+            FileUpload1.PostedFile.SaveAs(Server.MapPath("~/images/" + fileName));
+            String fileName2 = Global.uploadImage(Server.MapPath("~/images/" + fileName));
+            Session["image"] = "~/images/" + fileName;
+            //img1.ImageUrl = "~/images/" + fileName;
             //Response.Redirect("AddProduct.aspx");
             // Debug.WriteLine(RetailPrice.Value);
 
