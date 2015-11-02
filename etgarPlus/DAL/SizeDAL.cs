@@ -82,7 +82,11 @@ namespace etgarPlus.DAL
         {
             con.Open();
 <<<<<<< HEAD
+<<<<<<< HEAD
             string sqlString = "select p.Size from SizeID p where p.Id = " + ID.ToString() + ";";
+=======
+            string sqlString = "select Size from SizeId p where p.Id = " + ID.ToString() + ";";
+>>>>>>> parent of e6cc75b... cloudinary
 =======
             string sqlString = "select Size from SizeId p where p.Id = " + ID.ToString() + ";";
 >>>>>>> parent of e6cc75b... cloudinary

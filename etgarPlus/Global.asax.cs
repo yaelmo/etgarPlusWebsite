@@ -9,10 +9,13 @@ using System.Web.Routing;
 using System.Web.Security;
 using System.Web.SessionState;
 <<<<<<< HEAD
+<<<<<<< HEAD
 using CloudinaryDotNet;
 using CloudinaryDotNet.Actions;
 using System.Configuration;
 using System.Diagnostics;
+=======
+>>>>>>> parent of e6cc75b... cloudinary
 =======
 >>>>>>> parent of e6cc75b... cloudinary
 
@@ -56,6 +59,7 @@ namespace etgarPlus
             }
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         internal static String uploadImage(String filePath, String publicId) 
         {
 
@@ -76,6 +80,8 @@ namespace etgarPlus
             return url;
         }
        
+=======
+>>>>>>> parent of e6cc75b... cloudinary
 =======
 >>>>>>> parent of e6cc75b... cloudinary
     }
