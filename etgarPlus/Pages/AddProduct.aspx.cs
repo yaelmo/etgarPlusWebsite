@@ -17,11 +17,8 @@ namespace etgarPlus.Pages
 {
     public partial class AddProduct : System.Web.UI.Page
     {
-<<<<<<< HEAD
-=======
 
 
->>>>>>> 343b58c54f9ada22886bcba8b29d4d554bc8c73d
         etgarPlus.Logic.BicycleBL NewBike = new Logic.BicycleBL();
         int IdBike = 50;
         etgarPlus.Logic.SubCategoryBL subCategoryBl = new Logic.SubCategoryBL();
@@ -29,18 +26,12 @@ namespace etgarPlus.Pages
         etgarPlus.Logic.CategoryBL categorBl = new Logic.CategoryBL();
         etgarPlus.Logic.SizeBL sizeBl = new Logic.SizeBL();
         etgarPlus.Logic.ColorBL Color_Bl = new etgarPlus.Logic.ColorBL();
-<<<<<<< HEAD
-       
 
-        protected void Page_Load(object sender, EventArgs e)
-        {  
-=======
 
 
         protected void Page_Load(object sender, EventArgs e)
         {
 
->>>>>>> 343b58c54f9ada22886bcba8b29d4d554bc8c73d
 
             etgarPlus.Logic.ProducerBL producerBL = new etgarPlus.Logic.ProducerBL();
             List<etgarPlus.Classes.Producer> lisProducer = producerBL.getAllProducer();
@@ -98,82 +89,22 @@ namespace etgarPlus.Pages
             RegularPrice.Value = "";
             ClubPrice.Value = "";
             Quantity.Value = "";
-<<<<<<< HEAD
+
             FileUpload1.Attributes.Clear();
-=======
-           // FileUpload1.Attributes.Clear();
->>>>>>> 343b58c54f9ada22886bcba8b29d4d554bc8c73d
+
             Specification.Text = "";
 
 
         }
 
-
-
-
-<<<<<<< HEAD
-        protected void submitButton_Click(object sender, EventArgs e)
-        {
- 
-           // BackgroundUploader bgUploader =  GetUploader();
-            string fileName = System.IO.Path.GetFileName(FileUpload1.PostedFile.FileName);
-           
-            Console.WriteLine(fileName);
-            
-
-            
-            FileUpload1.PostedFile.SaveAs(Server.MapPath("~/images/" + fileName));
-            String fileName2 = Global.uploadImage(Server.MapPath("~/images/" + fileName));
-            Session["image"] = "~/images/" + fileName;
-            //img1.ImageUrl = "~/images/" + fileName;
-=======
         protected void submitButton_Click(object sender, System.EventArgs e)
         {
  
-           // BackgroundUploader bgUploader =  GetUploader();
-
-           // string fileName = System.IO.Path.GetFileName(FileUpload1.PostedFile.FileName);
-           
-            //Console.WriteLine(fileName);
-            //string fileName2 = Global.uploadImage(FileUpload1.PostedFile.FileName);
-            string fn = "";
+          
+            string fileName = "";
             string SaveLocation = "";
 
-            if ((File1.PostedFile != null) && (File1.PostedFile.ContentLength > 0))
-            {
-                fn = System.IO.Path.GetFileName(File1.PostedFile.FileName);
-                SaveLocation = Server.MapPath("~/images") + "\\" + fn;
-                File1.PostedFile.SaveAs(SaveLocation);
-                Response.Write("The file has been uploaded.");
-                try
-                {
-                    
-                }
-                catch (Exception ex)
-                {
-                    Response.Write("Error: " + ex.Message);
-                    //Note: Exception.Message returns a detailed message that describes the current exception. 
-                    //For security reasons, we do not recommend that you return Exception.Message to end users in 
-                    //production environments. It would be better to put a generic error message. 
-                }
-            }
-            else
-            {
-                Response.Write("Please select a file to upload.");
-            }
-
-
-
-
-
-
-
-            //FileUpload1.PostedFile.SaveAs(Server.MapPath("~/images/" + fileName));
-            // Session["image"] = "~/images/" + fileName;
-            // img1.ImageUrl = "~/images/" + fileName;
->>>>>>> 343b58c54f9ada22886bcba8b29d4d554bc8c73d
-            //Response.Redirect("AddProduct.aspx");
-            // Debug.WriteLine(RetailPrice.Value);
+            
 
             if (RetailPrice.Value.ToString().Equals(""))
             {
@@ -279,14 +210,34 @@ namespace etgarPlus.Pages
                         Response.Write("<script language=javascript>alert('הוסף שם יצרן חדש');</script>");
 
                 }
+                if ((FileUpload1.PostedFile != null) && (FileUpload1.PostedFile.ContentLength > 0))
+                {
+                    String fileName2 = "";
+                    fileName = System.IO.Path.GetFileName(FileUpload1.PostedFile.FileName);
+                    SaveLocation = Server.MapPath("~/images/")  + fileName;
 
+                    try
+                    {
+                        FileUpload1.PostedFile.SaveAs(SaveLocation);
+                        fileName2 = Global.uploadImage(SaveLocation, produc + "_" + DateTime.Now.ToString().Replace("/", "_").Replace(":", "_").Replace(" ", "_"));
+                        Response.Write("The file has been uploaded.");
+                    }
+                    catch (Exception ex)
+                    {
+                        Response.Write("Error: " + ex.Message);
+                        //Note: Exception.Message returns a detailed message that describes the current exception. 
+                        //For security reasons, we do not recommend that you return Exception.Message to end users in 
+                        //production environments. It would be better to put a generic error message. 
+                    }
+                }
+                else
+                {
+                    Response.Write("Please select a file to upload.");
+                }
+                //NewBike.AddNewBike(NewBike.getMaxId(), catego, sub_catego, produc, siz, Specification.Text, color, Convert.ToDouble(RetailPrice.Value), Convert.ToDouble(RegularPrice.Value), Convert.ToDouble(ClubPrice.Value), Convert.ToInt32(Quantity.Value), FileUpload1.FileName, Model.Value);
 
+                NewBike.AddNewBike(NewBike.getMaxId(), catego, sub_catego, produc, siz, Specification.Text, color, Convert.ToDouble(RetailPrice.Value), Convert.ToDouble(RegularPrice.Value), Convert.ToDouble(ClubPrice.Value), Convert.ToInt32(Quantity.Value), fileName, Model.Value);
 
-<<<<<<< HEAD
-                NewBike.AddNewBike(NewBike.getMaxId(), catego, sub_catego, produc, siz, Specification.Text, color, Convert.ToDouble(RetailPrice.Value), Convert.ToDouble(RegularPrice.Value), Convert.ToDouble(ClubPrice.Value), Convert.ToInt32(Quantity.Value), FileUpload1.FileName, Model.Value);
-=======
-                NewBike.AddNewBike(NewBike.getMaxId(), catego, sub_catego, produc, siz, Specification.Text, color, Convert.ToDouble(RetailPrice.Value), Convert.ToDouble(RegularPrice.Value), Convert.ToDouble(ClubPrice.Value), Convert.ToInt32(Quantity.Value), fn, Model.Value);
->>>>>>> 343b58c54f9ada22886bcba8b29d4d554bc8c73d
                 resetButton_Click(sender, e);
 
             }
@@ -310,42 +261,6 @@ namespace etgarPlus.Pages
         {
             RetailPrice.Value = "הצליח";
         }
-        protected void UplodeImg_Click(object sender, EventArgs e)
-        {
-
-
-
-
-            // lblimg_name.Text = FileUpload1.FileName.ToString();
-            /*if (Session["image"] != null)
-            {
-                img1.ImageUrl = Session["image"].ToString();
-            }*/
-        }
-
-        protected void Browse_Click(object sender, EventArgs e)
-        {
-            //// Create an instance of the open file dialog box.
-            //OpenFileDialog openFileDialog1 = new OpenFileDialog();
-            
-            //openFileDialog1.Multiselect = false;
-
-            //// Call the ShowDialog method to show the dialog box.
-            //bool? userClickedOK = openFileDialog1.ShowDialog();
-
-            //// Process input if the user clicked OK.
-            //if (userClickedOK == true)
-            //{
-            //    // Open the selected file to read.
-            //    System.IO.Stream fileStream = openFileDialog1.File.OpenRead();
-
-            //    using (System.IO.StreamReader reader = new System.IO.StreamReader(fileStream))
-            //    {
-            //        // Read the first line from the file and write it the textbox.
-            //        tbResults.Text = reader.ReadLine();
-            //    }
-            //    fileStream.Close();
-            //}
-        }
+        
     }
 }

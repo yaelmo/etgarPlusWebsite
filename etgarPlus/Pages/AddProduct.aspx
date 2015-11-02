@@ -69,13 +69,8 @@
         <div>
             <label class="MyAccountLabel">תמונה:</label>
            
-            <%--<asp:FileUpload ID="FileUpload1" runat="server" />--%>
-            <input type="file" id="File1" name="File1" runat="server" />
-            <br />
-            <input type="submit" id="Submit1" value="Upload" runat="server" />
-            <%--<asp:Button ID="Button1" runat="server" Text="Upload" OnClick="UplodeImg_Click" />--%>
-            <%--<asp:Button ID="Browse" runat="server" OnClick="Browse_Click" Text="Browse..." />
-            <asp:TextBox ID="FileName" runat="server"></asp:TextBox>--%>
+            <asp:FileUpload ID="FileUpload1" runat="server" />
+
         </div>
         <div  style='display:none '>
             <label class="MyAccountLabel">פרטים נוספים:</label>
